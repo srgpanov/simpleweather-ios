@@ -12,8 +12,7 @@ import UIKit
 class FavouriteConverter{
     
     func createSearchItemsList(searchResponse:[SearchEntityDto])->[RvItem]{
-        
-        return    searchResponse.map { (dto:SearchEntityDto) in
+        return searchResponse.map { (dto:SearchEntityDto) in
             TextRvItem(
                 routerId: dto.id,
                 text: "\(dto.country), \(dto.region), \(dto.name)",
@@ -22,5 +21,17 @@ class FavouriteConverter{
             )
         }
         
+    }
+    
+    func createFavouriteItemsList(favourites:[SearchEntityDto]) ->[RvItem]{
+        return favourites.map { (dto:SearchEntityDto) in
+            FavouriteRvItem(
+                title: dto.name ,
+                time: "22:59",
+                temp: "+23",
+                icon:  "ic_ovc",
+                sharedArgs: dto
+            )
+        }
     }
 }

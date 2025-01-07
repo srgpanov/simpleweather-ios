@@ -20,14 +20,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
         
         
-        
-        let geoLocation = GeoLocation(latitude: 45.035469, longitude:38.975309)
-        let viewController =  WeatherDetailsViewController(geolocation: geoLocation)
-        let navController = UINavigationController(rootViewController:viewController)
-        navController.isNavigationBarHidden = false
-        navController.viewControllers = [viewController]
+
+        let location = SettingsStorage().getLastLocation()
+        let viewController =  WeatherDetailsViewController(geolocation: location,isPreview:false)
+        let navController = RootViewController(rootViewController:viewController)
+        print("SceneDelegate navigationController=\(navController)")
         window.rootViewController = navController
         window.safeAreaLayoutGuide.owningView?.backgroundColor = UIColor.cyan
+        
+//        let vc = ViewController()
+//        let secondVc = SecondViewController()
+//        let navigationController = NavigationViewController(rootViewController: vc)
+//        window.rootViewController = navigationController
+//
+//        vc.navigationController?.pushViewController(secondVc, animated: true)
         
     }
 
@@ -61,4 +67,39 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
+
+class ViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        title = "ViewController"
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
+        
+        view.setOnClickListener {
+            self.navigationController?.pushViewController(SecondViewController(), animated: true)
+        }
+        
+    }
+  
+    @objc func backTapped(){
+        navigationController?.popViewController(animated: true)
+    }
+}
+
+class SecondViewController : UIViewController{
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    view.backgroundColor = .yellow
+      title = "SecondViewController"
+  }
+}
+
+class NavigationViewController: UINavigationController {
+  override func viewDidLoad() {
+     super.viewDidLoad()
+   }
+}
+
+
 

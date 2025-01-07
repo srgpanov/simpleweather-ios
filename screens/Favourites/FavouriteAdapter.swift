@@ -23,6 +23,20 @@ class FavouriteAdapter :NSObject, UITableViewDataSource,UITableViewDelegate {
         return items.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let item = items[indexPath.item]
+        
+        switch item {
+        case _ as TextRvItem :
+           
+            return CGFloat(32)
+        case _ as FavouriteRvItem :
+            return CGFloat(100)
+        default:
+            fatalError()
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = items[indexPath.row]
         
@@ -32,6 +46,11 @@ class FavouriteAdapter :NSObject, UITableViewDataSource,UITableViewDelegate {
 
         case let item as TextRvItem :
             let cell = tableView.dequeueReusableCell(withIdentifier: TextRvItem.identifier) as! TextCell
+            cell.bind(item:item )
+            viewHolder = cell
+            
+        case let item as FavouriteRvItem:
+            let cell = tableView.dequeueReusableCell(withIdentifier: FavouriteRvItem.identifier) as! FavouriteCell
             cell.bind(item:item )
             viewHolder = cell
         default:

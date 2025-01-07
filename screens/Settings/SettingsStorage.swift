@@ -83,3 +83,25 @@ class MeasurementsStorage: MeasurementsStorageProtocol {
 
 }
 
+
+class SettingsStorage{
+        private static let  KEY_CURRENT_LOCATION = "KEY_CURRENT_LOCATION"
+    
+    
+    func getLastLocation()->SearchEntityDto{
+        guard let savedLocation = try?  UserDefaults.standard.get(objectType: SearchEntityDto.self, forKey: SettingsStorage.KEY_CURRENT_LOCATION) else {
+            return SearchEntityDto(
+                id:1,
+                    name:"Краснодар",
+                    region:"",
+                    country:"",
+                    lat:45.035469,
+                    lon:38.975309,
+                    url:""
+            )
+        }
+        
+        return savedLocation
+    }
+}
+

@@ -6,17 +6,21 @@
 //
 
 import Foundation
+import UIKit
 
 
 class InteractivePopRecognizer: NSObject, UIGestureRecognizerDelegate {
 
-    weak var navigationController: UINavigationController
+    weak var navigationController: UINavigationController?
 
     init(controller: UINavigationController) {
         self.navigationController = controller
     }
 
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let navigationController =  navigationController else {
+            return false
+        }
         return navigationController.viewControllers.count > 1
     }
 

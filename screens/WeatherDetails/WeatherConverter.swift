@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class WeatherConverter{
     private let dateFormatter:DateFormatter = {
@@ -28,7 +29,23 @@ class WeatherConverter{
     }()
     private let calendar = Calendar.current
     
+    private func createToolbarBtn(imageRes: String) -> UIImage {
+        return UIImage(named: imageRes)!
+
+    }
+    func createToolbarRightSettingsButton()->UIImage {
+        return createToolbarBtn(imageRes:"ic_ovc")
+    }
     
+    func createToolbarRightFavouriteButton(isFavourite:Bool)->UIImage {
+        let imageRes:String
+        if isFavourite{
+            imageRes = "ic_favourite_outline"
+        }else{
+            imageRes = "ic_favourite_filled"
+        }
+        return createToolbarBtn(imageRes:imageRes)
+    }
     func createItemsList(response:WeatherResponse)->[RvItem]{
         var items = createDaysItems(response)
         items.insert(createHeaderItem(response:response), at: 0)

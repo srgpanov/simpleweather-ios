@@ -19,18 +19,22 @@ class WeatherDetailsViewController: UIViewController {
         return label
     }()
     private let adapter = WeatherAdapter()
-    private let location :GeoLocation
+    private let location :SearchEntityDto
     private let viewModel:WeatherDetailsViewModel
     private let bag = DisposeBag()
+    private let isPreview:Bool
+    
+    private var rightBtn:UIButton? = nil
     
     static let toolbarHeight = 56
     static let toolbarIconsSize = 32
     static let elementOffset = 16
     
     
-    init(geolocation:GeoLocation){
+    init(geolocation:SearchEntityDto, isPreview:Bool){
         self.location = geolocation
-        viewModel = WeatherDetailsViewModel(location:location)
+        self.isPreview = isPreview
+        viewModel = WeatherDetailsViewModel(location:location, isPreview: isPreview)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -58,6 +62,14 @@ class WeatherDetailsViewController: UIViewController {
                 self.recycler.reloadData()
             }
             .disposed(by: bag)
+        
+        viewModel.getToolbarRightIcon()
+            .subscribe(onNext: { (image:UIImage) in
+                let rightBtn = self.getOrCreateToolbarRightButton()
+                rightBtn.setImage(image, for: .normal)
+                
+            })
+            .disposed(by: bag)
     }
     
     
@@ -68,6 +80,8 @@ class WeatherDetailsViewController: UIViewController {
         recycler.delegate = adapter
         recycler.rowHeight = UITableView.automaticDimension
         recycler.contentInsetAdjustmentBehavior = .never
+        recycler.delaysContentTouches = false
+        print("recycler=\(recycler.isUserInteractionEnabled) view=\(view.isUserInteractionEnabled)")
 
         
         let safeAreaBottom: CGFloat = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.bottom ?? 0.0
@@ -84,47 +98,76 @@ class WeatherDetailsViewController: UIViewController {
     }
     func setupToolbar(){
 
-        navigationItem.title = "Краснодар"
+        navigationItem.title = location.name
         
-        let leftImageBtn = createToolbarButton()
+        let leftImageBtn = createToolbarLeftButton()
         let leftBtn = UIBarButtonItem(customView: leftImageBtn)
-//        leftBtn.image = UIImage(named: "ic_ovc")
         navigationItem.leftBarButtonItem = leftBtn
         
-       let  rightImageBtn = createToolbarButton()
+       let  rightImageBtn = getOrCreateToolbarRightButton()
         let rightBtn = UIBarButtonItem(customView: rightImageBtn)
-//        rightBtn.image = UIImage(named: "ic_ovc")
         navigationItem.rightBarButtonItem = rightBtn
         
         titleLabel.backgroundColor = .red
         
         
-        
-        
         leftImageBtn.setOnClickListener{
-            let viewController = FavouritesViewController()
-            self.navigationController!.pushViewController(viewController, animated: true)
+            if self.isPreview {
+                self.navigationController!.popViewController(animated: true)
+            } else {
+                let viewController = FavouritesViewController()
+                self.navigationController!.pushViewController(viewController, animated: true)
+            }
+
         }
         rightImageBtn.setOnClickListener{
-            self.onSettingsButtonClick()
+            if self.isPreview {
+                self.viewModel.onFavoriteIconClick()
+            }else {
+                self.onSettingsButtonClick()
+            }
         }
         navigationItem.titleView?.backgroundColor = .blue
-        
-        
     }
     
-    private func createToolbarButton()->UIButton {
-        let config = UIImage.SymbolConfiguration(pointSize: 25.0, weight: .medium, scale: .medium)
+    private func getOrCreateToolbarRightButton()->UIButton {
+        if rightBtn != nil {
+            return rightBtn!
+        }
+        
+        let btn = UIButton(type: .custom)
+
+        btn.setTitleColor(btn.tintColor, for: .normal)
+        btn.bounds = CGRect(x: 0, y: 0, width: 44, height: 44)
+        rightBtn = btn
+        return btn
+    }
+    
+    fileprivate func createLeftBackButton() -> UIButton {
+        let image = UIImage(systemName:  "chevron.backward")
+        let btn = UIButton(type: .system)
+        btn.setImage(image, for: .normal)
+        
+        return btn
+    }
+    
+    private func createToolbarLeftButton()->UIButton {
+        if isPreview {
+            return createLeftBackButton()
+        } else {
+            return createLeftMenuButton()
+        }
+    }
+    private func createLeftMenuButton()->UIButton{
         let image = UIImage(named: "ic_ovc")
         let btn = UIButton(type: .custom)
+        
         btn.setImage(image, for: .normal)
-        btn.setTitleColor(btn.tintColor, for: .normal)
 
         return btn
     }
     
     @objc func onSettingsButtonClick() {
-
         let viewController = SettingsViewController()
         navigationController!.pushViewController(viewController, animated: true)
     }
