@@ -14,6 +14,7 @@
 		9E18FBD92AC8E203009CFD71 /* WeatherHourlyAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18FBD82AC8E203009CFD71 /* WeatherHourlyAdapter.swift */; };
 		9E18FBDB2AC8E24D009CFD71 /* WeatherHourlyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18FBDA2AC8E24D009CFD71 /* WeatherHourlyCell.swift */; };
 		9E22D8132CB2BA1600ECDA27 /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E22D8122CB2BA1600ECDA27 /* FavouritesViewController.swift */; };
+		9E3C73CB2D2EA2EF0057E797 /* WeatherPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3C73CA2D2EA2EF0057E797 /* WeatherPager.swift */; };
 		9E43ECEF2D22A2D300B9EBDF /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E43ECEE2D22A2D300B9EBDF /* RootViewController.swift */; };
 		9E43ECF12D22B8EB00B9EBDF /* InteractivePopRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E43ECF02D22B8EB00B9EBDF /* InteractivePopRecognizer.swift */; };
 		9E52C2C72D29CACD00E4FC5B /* FavouriteStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52C2C62D29CACD00E4FC5B /* FavouriteStorage.swift */; };
@@ -68,6 +69,7 @@
 		9E18FBD82AC8E203009CFD71 /* WeatherHourlyAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherHourlyAdapter.swift; sourceTree = "<group>"; };
 		9E18FBDA2AC8E24D009CFD71 /* WeatherHourlyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherHourlyCell.swift; sourceTree = "<group>"; };
 		9E22D8122CB2BA1600ECDA27 /* FavouritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
+		9E3C73CA2D2EA2EF0057E797 /* WeatherPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherPager.swift; sourceTree = "<group>"; };
 		9E43ECEE2D22A2D300B9EBDF /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		9E43ECF02D22B8EB00B9EBDF /* InteractivePopRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractivePopRecognizer.swift; sourceTree = "<group>"; };
 		9E52C2C62D29CACD00E4FC5B /* FavouriteStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteStorage.swift; sourceTree = "<group>"; };
@@ -171,6 +173,14 @@
 			children = (
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		9E3C73C92D2E98300057E797 /* Pager */ = {
+			isa = PBXGroup;
+			children = (
+				9E3C73CA2D2EA2EF0057E797 /* WeatherPager.swift */,
+			);
+			path = Pager;
 			sourceTree = "<group>";
 		};
 		9E43ECED2D22A2B100B9EBDF /* Root */ = {
@@ -322,6 +332,7 @@
 		9EC7189F2AC6D6A100D55C76 /* screens */ = {
 			isa = PBXGroup;
 			children = (
+				9E3C73C92D2E98300057E797 /* Pager */,
 				9E43ECED2D22A2B100B9EBDF /* Root */,
 				9E22D8142CB34C6000ECDA27 /* Search */,
 				9E22D8112CB2B9D800ECDA27 /* Favourites */,
@@ -481,6 +492,7 @@
 				9EC4997A2CE9F72F00EB2CF1 /* ApiKey.swift in Sources */,
 				9EE344862CCECC4F00C427FF /* FavouritesViewModel.swift in Sources */,
 				9EBB25772B4836B300582211 /* StringExtensions.swift in Sources */,
+				9E3C73CB2D2EA2EF0057E797 /* WeatherPager.swift in Sources */,
 				9EC4997E2CEA03B000EB2CF1 /* FavouriteConverter.swift in Sources */,
 				9EC7188A2AC6D53A00D55C76 /* AppDelegate.swift in Sources */,
 				9E5EAAA22D0616C500A56369 /* Location.swift in Sources */,

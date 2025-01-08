@@ -19,7 +19,7 @@ class WeatherDetailsViewController: UIViewController {
         return label
     }()
     private let adapter = WeatherAdapter()
-    private let location :SearchEntityDto
+    public let location :SearchEntityDto
     private let viewModel:WeatherDetailsViewModel
     private let bag = DisposeBag()
     private let isPreview:Bool

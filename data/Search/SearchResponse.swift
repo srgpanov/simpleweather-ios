@@ -9,7 +9,7 @@ import Foundation
 
 
 // MARK: - SearchResponseElement
-struct SearchEntityDto: Codable {
+struct SearchEntityDto: Codable,Equatable {
     let id: Int
     let name: String
     let region: String

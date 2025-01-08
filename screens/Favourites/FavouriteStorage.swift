@@ -42,6 +42,10 @@ class FavouriteStorage{
     
     func getFavouriteElements() -> Observable<[SearchEntityDto]>{
         return storage.observableArray(key:FavouriteStorage.KEY_FAVOURITES)
-            }
+}
+    
+    func getFavouriteElements() -> [SearchEntityDto]{
+        return storage.readArray(forKey: FavouriteStorage.KEY_FAVOURITES)
+}
     }
 
