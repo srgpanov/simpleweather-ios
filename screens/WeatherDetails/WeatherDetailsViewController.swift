@@ -11,13 +11,6 @@ import RxSwift
 
 class WeatherDetailsViewController: UIViewController {
     private let recycler = UITableView()
-    private let titleLabel:UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 1
-        label.lineBreakMode = .byTruncatingTail
-        
-        return label
-    }()
     private let adapter = WeatherAdapter()
     public let location :SearchEntityDto
     private let viewModel:WeatherDetailsViewModel
@@ -97,7 +90,10 @@ class WeatherDetailsViewController: UIViewController {
         
     }
     func setupToolbar(){
-
+        guard isPreview else {
+            return
+        }
+        
         navigationItem.title = location.name
         
         let leftImageBtn = createToolbarLeftButton()
@@ -108,24 +104,13 @@ class WeatherDetailsViewController: UIViewController {
         let rightBtn = UIBarButtonItem(customView: rightImageBtn)
         navigationItem.rightBarButtonItem = rightBtn
         
-        titleLabel.backgroundColor = .red
-        
         
         leftImageBtn.setOnClickListener{
-            if self.isPreview {
                 self.navigationController!.popViewController(animated: true)
-            } else {
-                let viewController = FavouritesViewController()
-                self.navigationController!.pushViewController(viewController, animated: true)
-            }
 
         }
         rightImageBtn.setOnClickListener{
-            if self.isPreview {
                 self.viewModel.onFavoriteIconClick()
-            }else {
-                self.onSettingsButtonClick()
-            }
         }
         navigationItem.titleView?.backgroundColor = .blue
     }

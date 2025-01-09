@@ -3,4 +3,69 @@
    uuid = "12882321-5FCE-4D60-8B3E-C4C5FB47815B"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EE09E69C-E005-4D5F-B773-2AA5772257B2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "screens/WeatherDetails/WeatherDetailsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "WeatherDetailsViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "EE09E69C-E005-4D5F-B773-2AA5772257B2 - 164977788f4108fa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "simpleweather.WeatherDetailsViewController.createLeftBackButton() -&gt; __C.UIButton"
+                  moduleName = "simpleweather"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/srgpanov/ios/SimpleWeather/simpleweather/screens/WeatherDetails/WeatherDetailsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "147"
+                  endingLineNumber = "147"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "EE09E69C-E005-4D5F-B773-2AA5772257B2 - 35b864eef8738287"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "simpleweather.WeatherDetailsViewController.createToolbarLeftButton() -&gt; __C.UIButton"
+                  moduleName = "simpleweather"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/srgpanov/ios/SimpleWeather/simpleweather/screens/WeatherDetails/WeatherDetailsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "149"
+                  endingLineNumber = "149"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  uuid = "EE09E69C-E005-4D5F-B773-2AA5772257B2 - 35b864eef873847c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "simpleweather.WeatherDetailsViewController.createToolbarLeftButton() -&gt; __C.UIButton"
+                  moduleName = "simpleweather"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/srgpanov/ios/SimpleWeather/simpleweather/screens/WeatherDetails/WeatherDetailsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "140"
+                  endingLineNumber = "140"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

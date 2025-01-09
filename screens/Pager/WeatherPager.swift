@@ -35,6 +35,7 @@ class WeatherPager : UIPageViewController{
         
         
         if let weatherDetails:WeatherDetailsViewController = weatherViewControllerAtIndex(index: currentIndex) {
+            setupToolbarBtns()
             setupToolbar(dto:weatherDetails.location)
             
             let viewControllers = [weatherDetails]
@@ -56,9 +57,75 @@ class WeatherPager : UIPageViewController{
         
         return WeatherDetailsViewController(geolocation: item, isPreview: false)
     }
+    private func setupToolbarBtns(){
+        let leftImageBtn = createLeftMenuButton()
+        let leftBtn = UIBarButtonItem(customView: leftImageBtn)
+        navigationItem.leftBarButtonItem = leftBtn
+        
+       let  rightImageBtn = createToolbarRightButton()
+        let rightBtn = UIBarButtonItem(customView: rightImageBtn)
+        navigationItem.rightBarButtonItem = rightBtn
+        
+        
+        
+        leftImageBtn.setOnClickListener{
+            let viewController = FavouritesViewController { (dto:SearchEntityDto) in
+                self.navigationController!.popViewController(animated: true)
+                
+                self.jump(to:self.weatherItems.firstIndex(of: dto)!, completion: nil)
+            }
+                self.navigationController!.pushViewController(viewController, animated: true)
+        }
+        rightImageBtn.setOnClickListener{
+                self.onSettingsButtonClick()
+        }
+        navigationItem.titleView?.backgroundColor = .blue
+    }
     
     private func setupToolbar(dto:SearchEntityDto){
         navigationItem.title = dto.name
+    }
+    private func jump(to: Int, completion: ((_ vc: WeatherDetailsViewController) -> Void)?){
+
+        guard weatherItems.count > to else{
+            //index of bounds
+            return
+        }
+
+        guard let weatherDetailsController:WeatherDetailsViewController = weatherViewControllerAtIndex(index: to) else {
+            return
+        }
+
+        let direction: UIPageViewController.NavigationDirection = .forward
+
+        setupToolbar(dto: weatherDetailsController.location)
+        setViewControllers(
+            [weatherDetailsController],
+            direction: direction,
+            animated: true,
+            completion: nil
+        )
+    }
+    
+    private func createLeftMenuButton()->UIButton{
+        let image = UIImage(named: "ic_ovc")
+        let btn = UIButton(type: .custom)
+        
+        btn.setImage(image, for: .normal)
+
+        return btn
+    }
+    
+    private func createToolbarRightButton()->UIButton {
+        let image = UIImage(named: "ic_ovc")
+        let btn = UIButton(type: .custom)
+
+        btn.setImage(image, for: .normal)
+        return btn
+    }
+    @objc func onSettingsButtonClick() {
+        let viewController = SettingsViewController()
+        navigationController!.pushViewController(viewController, animated: true)
     }
 }
 
