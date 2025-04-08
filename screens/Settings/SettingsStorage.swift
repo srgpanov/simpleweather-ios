@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxSwift
 
 
 protocol MeasurementsStorageProtocol {
@@ -88,20 +89,33 @@ class SettingsStorage{
         private static let  KEY_CURRENT_LOCATION = "KEY_CURRENT_LOCATION"
     
     
-    func getLastLocation()->SearchEntityDto{
-        guard let savedLocation = try?  UserDefaults.standard.get(objectType: SearchEntityDto.self, forKey: SettingsStorage.KEY_CURRENT_LOCATION) else {
-            return SearchEntityDto(
-                id:1,
-                    name:"Краснодар",
-                    region:"",
-                    country:"",
-                    lat:45.035469,
-                    lon:38.975309,
-                    url:""
-            )
-        }
-        
-        return savedLocation
+    func getCurrentLocationStream()-> Observable<SearchEntityDto>{
+        return UserDefaults.standard.observable(objectType: SearchEntityDto.self, key: SettingsStorage.KEY_CURRENT_LOCATION,defaultValue: {self.getDefaultLocation()})
+            .do { dto in
+            print("dto=\(dto)")
+            }
+    }
+    func getCurrentLocation()-> SearchEntityDto{
+        let fromStorage = UserDefaults.standard.get(objectType: SearchEntityDto.self, forKey:  SettingsStorage.KEY_CURRENT_LOCATION)
+        print("getCurrentLocation = \(fromStorage)")
+        return fromStorage ?? getCurrentLocation()
+    }
+    
+    private func getDefaultLocation()->SearchEntityDto {
+        print("getDefaultLocation")
+       return SearchEntityDto(
+            id:1,
+                name:"Краснодар",
+                region:"",
+                country:"",
+                lat:45.035469,
+                lon:38.975309,
+                url:""
+        )
+    }
+    
+    func setCurrentLocation (dto:SearchEntityDto)  {
+        UserDefaults.standard.set(object: dto ,forKey: SettingsStorage.KEY_CURRENT_LOCATION)
     }
 }
 

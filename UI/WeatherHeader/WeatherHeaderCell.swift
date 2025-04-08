@@ -96,7 +96,6 @@ class WeatherHeaderCell : UITableViewCell{
     
     fileprivate func setupTemeperatureStackView() {
         temeratureStackView.distribution = .equalCentering
-        temeratureStackView.translatesAutoresizingMaskIntoConstraints = false
         temeratureStackView.addArrangedSubview(temperatureLabel)
         temeratureStackView.addArrangedSubview(weatherIv)
     }

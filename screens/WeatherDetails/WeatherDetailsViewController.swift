@@ -79,8 +79,6 @@ class WeatherDetailsViewController: UIViewController {
         
         let safeAreaBottom: CGFloat = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.bottom ?? 0.0
         recycler.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: safeAreaBottom, right: 0.0);
-        
-        recycler.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setupViews(){

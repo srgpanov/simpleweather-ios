@@ -16,26 +16,38 @@ class FavouritesViewModel {
     private let repository = SearchRepository()
     private let converter = FavouriteConverter()
     private let historyStorage = SearchHistoryStorage()
+    private let settingStorage = SettingsStorage()
     private let favouriteStorage = FavouriteStorage()
     private lazy var searchSource:Observable<[SearchEntityDto]> = getSearchStream()
     private lazy var favouriteSource:Observable<[SearchEntityDto]> = getFavouritesSource()
-   private  lazy var s = observeSearchItemsClick()
+    private  lazy var s = observeSearchItemsClick()
     private var itemsClickDisposable: Disposable?
+    private var isCurrentLocationSelect = false
     
     
-
     
-    func observeSearchItemsClick() ->Observable<SearchEntityDto>{
-        return  elementClickSubject.withLatestFrom(searchSource){(index:Int,items:[SearchEntityDto]) in
-            items[index]
+    
+    func observeSearchItemsClick() ->Observable<SearchClickCortege>{
+        return  elementClickSubject.withLatestFrom(searchSource){(routerId:Int,items:[SearchEntityDto]) in
+            let dto = items.first { dto in
+                dto.id==routerId
+            }!
+            
+            return SearchClickCortege(isCurrentLocationSelect: self.isCurrentLocationSelect, searchDto: dto)
         }
-        .do(onNext: { (element: SearchEntityDto)in
-            self.historyStorage.saveSearchElement(element: element)
+        .do(onNext: { (element: SearchClickCortege) in
+            self.historyStorage.saveSearchElement(element: element.searchDto)
+            
+            print("isCurrentLocationSelect=\(self.isCurrentLocationSelect)")
+            if self.isCurrentLocationSelect {
+                self.settingStorage.setCurrentLocation(dto: element.searchDto )
+            }
         })
     }
+
     
     func getItemsStream() -> Observable<[RvItem]>{
-      return  searchBarIsVisible.flatMapLatest { isVisible in
+        return  searchBarIsVisible.flatMapLatest { isVisible in
             if isVisible {
                 self.searchSource    .map { items in
                     self.converter.createSearchItemsList(searchResponse: items)
@@ -45,7 +57,7 @@ class FavouritesViewModel {
             }
         }
         
-
+        
     }
     
     
@@ -74,9 +86,18 @@ class FavouritesViewModel {
             .replay(1)
             .refCount()
     }
+    
+    private func getCurrentLocation()->Observable<SearchEntityDto> {
+        return settingStorage.getCurrentLocationStream()
+
+    }
+    
+    
     private func getFavouritesItems()->Observable<[RvItem]> {
-        return favouriteSource.map {   items in
-              self.converter.createFavouriteItemsList(favourites: items)
+        return Observable.combineLatest(getCurrentLocation(), favouriteSource) { current,  favourites in
+            let current = self.converter.createCurrentItemsList(current:current)
+           let favourites = self.converter.createFavouriteItemsList(favourites: favourites)
+           return current + favourites
         }
     }
     
@@ -95,8 +116,15 @@ class FavouritesViewModel {
     
     
     func onTextItemClick(index:Int,item:TextRvItem){
-        elementClickSubject.onNext(index)
-    }    
+        elementClickSubject.onNext(item.routerId)
+        
+    }
+    func onCustomLocationClick(){
+        isCurrentLocationSelect = true
+    }
+    func onGeoLocationClick(){
+        
+    }
     
     func onFavoriteItemClick(index:Int,item:FavouriteRvItem){
         print("onFavoriteItemClick")
@@ -115,6 +143,9 @@ class FavouritesViewModel {
     
     func onSearchBarrHidden(isActive:Bool){
         searchBarIsVisible.onNext(isActive)
+        if !isActive {
+            isCurrentLocationSelect = false
+        }
     }
     
     deinit{

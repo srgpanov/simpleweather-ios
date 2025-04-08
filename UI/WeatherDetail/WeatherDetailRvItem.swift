@@ -9,7 +9,6 @@ import UIKit
 
 struct WeatherDetailRvItem: RvItem {
     public static let identifier = "WeatherDetailRvItem"
-    var identifier: String = WeatherDetailRvItem.identifier
     
     let windSpeed: String
     let windSpeedValue: String

@@ -21,8 +21,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
 
-        let location = SettingsStorage().getLastLocation()
-//        let viewController =  WeatherDetailsViewController(geolocation: location,isPreview:false)
         let viewController =  WeatherPager()
         let navController = RootViewController(rootViewController:viewController)
         print("SceneDelegate navigationController=\(navController)")

@@ -14,7 +14,9 @@ class WeatherPager : UIPageViewController{
     
     
     init(){
-        weatherItems=FavouriteStorage().getFavouriteElements()
+        let current:SearchEntityDto = SettingsStorage().getCurrentLocation()
+        print ("current=\(current)")
+        weatherItems=[current] + FavouriteStorage().getFavouriteElements()
         currentIndex=0
         super.init(
             transitionStyle: .scroll,

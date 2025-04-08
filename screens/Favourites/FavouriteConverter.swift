@@ -34,4 +34,18 @@ class FavouriteConverter{
             )
         }
     }
-}
+    
+    func createCurrentItemsList(current:SearchEntityDto)->[RvItem]{
+        return [
+            FavouriteRvItem(
+                title:  current.name,
+                time: "current_place".asStringRes(),
+                temp: "+23",
+                icon:  "ic_ovc",
+                sharedArgs: current
+            ),
+            
+            UserLocationRvItem()
+        ]
+    }
+ }

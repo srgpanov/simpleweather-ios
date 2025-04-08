@@ -12,9 +12,10 @@ import UIKit
 class FavouriteAdapter :NSObject, UITableViewDataSource,UITableViewDelegate {
     
     
-    var onItemClick:(Int,RvItem)->Void = {(index,item) in
-        print(index)
-    }
+    var onFavouriteClick:((FavouriteRvItem)->Void )?
+    var onTextClick:((Int, TextRvItem)->Void )?
+    var onCustomLocationClick: (() -> Void)?
+    var onGeoLocationClick: (() -> Void)?
     
     private var items:[RvItem] = []
     
@@ -32,6 +33,9 @@ class FavouriteAdapter :NSObject, UITableViewDataSource,UITableViewDelegate {
             return CGFloat(32)
         case _ as FavouriteRvItem :
             return CGFloat(100)
+            
+        case _ as UserLocationRvItem :
+            return CGFloat(48)
         default:
             fatalError()
         }
@@ -47,12 +51,29 @@ class FavouriteAdapter :NSObject, UITableViewDataSource,UITableViewDelegate {
         case let item as TextRvItem :
             let cell = tableView.dequeueReusableCell(withIdentifier: TextRvItem.identifier) as! TextCell
             cell.bind(item:item )
+            guard let click = onTextClick else {fatalError()}
+            cell.contentView.setOnClickListener {
+                click(indexPath.item,item)
+            }
+            
             viewHolder = cell
             
         case let item as FavouriteRvItem:
             let cell = tableView.dequeueReusableCell(withIdentifier: FavouriteRvItem.identifier) as! FavouriteCell
             cell.bind(item:item )
+            guard let click = onFavouriteClick else {fatalError()}
+            cell.contentView.setOnClickListener {
+                click(item)
+            }
             viewHolder = cell
+            
+        case let item as UserLocationRvItem:
+            let cell = tableView.dequeueReusableCell(withIdentifier: UserLocationRvItem.identifier) as! UserLocationCell
+            cell.bind(item:item )
+            cell.onGeoLocationClick = onGeoLocationClick
+            cell.onCustomLocationClick = onCustomLocationClick
+            viewHolder = cell
+            
         default:
             fatalError()
         }
@@ -60,11 +81,7 @@ class FavouriteAdapter :NSObject, UITableViewDataSource,UITableViewDelegate {
         return viewHolder
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let rvItem =        items[indexPath.item]
-        onItemClick( indexPath.item ,rvItem)
-       
-    }
+
 
     
     func setItems(items:[RvItem]){

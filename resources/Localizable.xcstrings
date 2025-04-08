@@ -67,6 +67,28 @@
         }
       }
     },
+    "current_place" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Текущее место"
+          }
+        }
+      }
+    },
+    "custom_location" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Указать вручную"
+          }
+        }
+      }
+    },
     "details_screen_temp_feels_like_prefix" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -96,6 +118,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Избранное"
+          }
+        }
+      }
+    },
+    "geo_location" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Определить, где я"
           }
         }
       }

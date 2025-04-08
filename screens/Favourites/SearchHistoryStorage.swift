@@ -18,8 +18,8 @@ class SearchHistoryStorage{
     
     func saveSearchElement(element:SearchEntityDto){
         var currentSearchList:[SearchEntityDto] =  storage.readArray(forKey:  SearchHistoryStorage.KEY_SEARCH_HISTORY)
-       currentSearchList = currentSearchList.filter { (item:SearchEntityDto) in
-           element.id != item.id 
+        currentSearchList = currentSearchList.filter { (item:SearchEntityDto) in
+            element.id != item.id
         }
         currentSearchList.insert(element, at: 0)
         currentSearchList=currentSearchList.take(count: SearchHistoryStorage.MAX_HISTORY_LENGTH )
@@ -34,6 +34,8 @@ class SearchHistoryStorage{
     func getSearchHistory() -> Observable<[SearchEntityDto]>{
         return storage.observableArray(key:SearchHistoryStorage.KEY_SEARCH_HISTORY)
     }
+    
+    
 }
 
 
@@ -55,11 +57,37 @@ extension UserDefaults {
             let observerToken = notificationCenter.addObserver(forName: UserDefaults.didChangeNotification, object: userDefaults, queue: nil) { notification in
                 // Каждый раз, когда значения в UserDefaults меняются, проверяем нужный ключ
                 if let value = userDefaults.value(forKey: key) as? T {
-                           observer.onNext(value)
-                       } else {
-                           // Если значение отсутствует, передаем дефолтное значение
-                           observer.onNext(defaultValue)
-                       }
+                    observer.onNext(value)
+                } else {
+                    // Если значение отсутствует, передаем дефолтное значение
+                    observer.onNext(defaultValue)
+                }
+            }
+            
+            return Disposables.create {
+                notificationCenter.removeObserver(observerToken)
+            }
+        }
+    }
+    func observable<T:Codable>(objectType: T.Type,key: String, defaultValue:@escaping ()-> T) -> Observable<T> {
+        return Observable.create { observer in
+            let userDefaults = UserDefaults.standard
+            
+            // Подписка на уведомления об изменении UserDefaults
+            let notificationCenter = NotificationCenter.default
+            
+             let initial = userDefaults.get(objectType: objectType, forKey: key) ?? defaultValue()
+            observer.onNext(initial)
+            
+            
+            let observerToken = notificationCenter.addObserver(forName: UserDefaults.didChangeNotification, object: userDefaults, queue: nil) { notification in
+                // Каждый раз, когда значения в UserDefaults меняются, проверяем нужный ключ
+                if let value = userDefaults.get(objectType: objectType, forKey: key)  {
+                    observer.onNext(value)
+                } else {
+                    // Если значение отсутствует, передаем дефолтное значение
+                    observer.onNext(defaultValue())
+                }
             }
             
             return Disposables.create {
@@ -77,16 +105,16 @@ extension UserDefaults {
             // Подписка на уведомления об изменении UserDefaults
             let notificationCenter = NotificationCenter.default
             
-             let initial:[SearchEntityDto] = userDefaults.readArray(forKey: key)
-                observer.onNext(initial)
-
+            let initial:[SearchEntityDto] = userDefaults.readArray(forKey: key)
+            observer.onNext(initial)
+            
             
             
             let observerToken = notificationCenter.addObserver(forName: UserDefaults.didChangeNotification, object: userDefaults, queue: nil) { notification in
                 // Каждый раз, когда значения в UserDefaults меняются, проверяем нужный ключ
-                 let value:[SearchEntityDto] = userDefaults.readArray(forKey: key)
-                           observer.onNext(value)
-          
+                let value:[SearchEntityDto] = userDefaults.readArray(forKey: key)
+                observer.onNext(value)
+                
             }
             
             return Disposables.create {
@@ -98,23 +126,29 @@ extension UserDefaults {
 
 
 extension UserDefaults {
-
-
-    func set<T: Codable>(object: T, forKey: String) throws {
-
-        let jsonData = try JSONEncoder().encode(object)
-
-        set(jsonData, forKey: forKey)
+    
+    
+    func set<T: Codable>(object: T, forKey: String)  {
+        do{
+            let jsonData = try JSONEncoder().encode(object)
+            set(jsonData, forKey: forKey)
+        } catch {
+            fatalError()
+        }
     }
-
-
-    func get<T: Codable>(objectType: T.Type, forKey: String) throws -> T? {
-
+    
+    
+    func get<T: Codable>(objectType: T.Type, forKey: String) -> T? {
+        
         guard let result = value(forKey: forKey) as? Data else {
             return nil
         }
-
-        return try JSONDecoder().decode(objectType, from: result)
+        
+        do {
+            return try JSONDecoder().decode(objectType, from: result)}
+        catch {
+            fatalError()
+        }
     }
     
     
@@ -127,7 +161,7 @@ extension UserDefaults {
             print("Error encoding array: \(error)")
         }
     }
-
+    
     func readArray<T: Codable>(forKey key: String) -> [T] {
         guard let data = data(forKey: key) else { return [] }
         do {

@@ -8,5 +8,5 @@
 import Foundation
 
 protocol RvItem{
-    var identifier:String { get }
+    static var identifier: String { get }
 }

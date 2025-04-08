@@ -26,7 +26,6 @@ class WeatherHourlyCell : UICollectionViewCell {
     }
     
     private func configure(){
-        contentView.translatesAutoresizingMaskIntoConstraints = false
         hourTimeLabel.numberOfLines = 0
         contentView.addSubview(hourTimeLabel)
         contentView.addSubview(weatherIv)

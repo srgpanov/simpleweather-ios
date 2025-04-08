@@ -11,8 +11,6 @@ import Foundation
 struct FavouriteRvItem:RvItem{
     public static let identifier = "FavouriteRvItem"
     
-    var identifier: String = FavouriteRvItem.identifier
-    
     let title:String
     let time:String
     let temp:String

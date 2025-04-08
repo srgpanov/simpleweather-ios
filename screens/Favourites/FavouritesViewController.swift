@@ -37,7 +37,7 @@ class FavouritesViewController: UIViewController ,UISearchResultsUpdating, UISea
         setupToolbar()
         setupRecycler()
         setupSearch()
-//        self.navigationController?.interactivePopGestureRecognizer?.delegate = self;
+        //        self.navigationController?.interactivePopGestureRecognizer?.delegate = self;
     }
     private func setupSearch(){
         searchController.searchResultsUpdater = self
@@ -47,7 +47,6 @@ class FavouritesViewController: UIViewController ,UISearchResultsUpdating, UISea
         searchController.searchBar.delegate = self
     }
     func updateSearchResults(for searchController: UISearchController) {
-        
         viewModel.onSearchBarrHidden(isActive : searchController.isActive)
         if searchController.isActive {
             guard let searchText = searchController.searchBar.text else {
@@ -56,8 +55,8 @@ class FavouritesViewController: UIViewController ,UISearchResultsUpdating, UISea
             
             print("searchText=\(searchText)")
             viewModel.onSearchQueryChanged(query: searchText)
-        } 
-
+        }
+        
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -78,10 +77,14 @@ class FavouritesViewController: UIViewController ,UISearchResultsUpdating, UISea
         .disposed(by: bag)
         
         viewModel.observeSearchItemsClick()
-            .subscribe(onNext: { dto in
-                let viewController = WeatherDetailsViewController(geolocation: dto,isPreview:true)
-                print("FavouritesViewController navigationController=\(self.navigationController)")
-                self.navigationController!.pushViewController(viewController, animated: true)
+            .subscribe(onNext: { cortege in
+                if cortege.isCurrentLocationSelect {
+                    self.searchController.isActive=false
+                } else{
+                    let viewController = WeatherDetailsViewController(geolocation: cortege.searchDto,isPreview:true)
+                    print("FavouritesViewController navigationController=\(self.navigationController)")
+                    self.navigationController!.pushViewController(viewController, animated: true)
+                }
             })
             .disposed(by: bag)
         
@@ -90,6 +93,7 @@ class FavouritesViewController: UIViewController ,UISearchResultsUpdating, UISea
     private func setupRecycler(){
         recycler.register(TextCell.self, forCellReuseIdentifier: TextRvItem.identifier)
         recycler.register(FavouriteCell.self, forCellReuseIdentifier: FavouriteRvItem.identifier)
+        recycler.register(UserLocationCell.self, forCellReuseIdentifier: UserLocationRvItem.identifier)
         recycler.delegate = adapter
         recycler.dataSource = adapter
         recycler.separatorStyle = .none
@@ -100,22 +104,20 @@ class FavouritesViewController: UIViewController ,UISearchResultsUpdating, UISea
         
         
         
-        adapter.onItemClick = { (index:Int,item : RvItem )in
-            
-            switch item{
-            case is TextRvItem:
-                self.viewModel.onTextItemClick(index:index,item:item as! TextRvItem)
-                
-            case is FavouriteRvItem:
-                let item = item as! FavouriteRvItem
-                self.viewModel.onFavoriteItemClick(index: index, item: item )
-                let dto  = item.sharedArgs as! SearchEntityDto
-//                self.openWeatherDetails(dto: dto)
-                self.onLocationSelected(dto)
-            default:
-                fatalError("unknown item \(item)")
-            }
-           
+        adapter.onFavouriteClick = { item in
+            self.onLocationSelected(item.sharedArgs as! SearchEntityDto)
+        }
+        
+        adapter.onTextClick = { (index, item) in
+            self.viewModel.onTextItemClick(index:index,item:item )
+        }
+        
+        adapter.onCustomLocationClick = {
+            self.searchController.isActive = true
+            self.viewModel.onCustomLocationClick()
+        }
+        adapter.onGeoLocationClick = {
+            print("onGeoLocationClick")
         }
         
         recycler.snp.makeConstraints { make in
@@ -123,7 +125,7 @@ class FavouritesViewController: UIViewController ,UISearchResultsUpdating, UISea
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
-
+    
     
     private func setupToolbar(){
         let backItem = UINavigationItem()

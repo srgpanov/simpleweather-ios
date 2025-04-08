@@ -9,7 +9,6 @@ import UIKit
 
 struct SettingsSwitchRvItem: RvItem {
     public static let identifier = "SettingsSwitchRvItem"
-    var identifier: String = SettingsSwitchRvItem.identifier
 
     
     let routerId:Int

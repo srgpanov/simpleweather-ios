@@ -10,7 +10,6 @@ import UIKit
 
 struct WeatherDayRvItem:RvItem{
     public static let identifier = "WeatherHourlyRvItem"
-    var identifier: String = WeatherHourlyRvItem.identifier 
     
     let date: String
     let dayWeek: String
