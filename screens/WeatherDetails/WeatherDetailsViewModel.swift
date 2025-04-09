@@ -15,16 +15,16 @@ class WeatherDetailsViewModel{
     private let converter = WeatherConverter()
     private lazy var favouriteStorage = FavouriteStorage()
     
-    let location:SearchEntityDto
+    let location:WeatherPlace
     let isPreview:Bool
     
-    init(location:SearchEntityDto, isPreview:Bool){
+    init(location:WeatherPlace, isPreview:Bool){
         self.location = location
         self.isPreview  = isPreview
     }
     
     func getWeather() -> Single<[RvItem]>{
-        return repository.getWeatherFull(latitude: location.lat, lonitude:location.lon)
+        return repository.getWeatherFull(latitude: location.geoLocation.latitude, lonitude:location.geoLocation.longitude)
             .map { response in
                 self.converter.createItemsList(response: response)
             }

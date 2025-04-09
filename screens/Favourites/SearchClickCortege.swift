@@ -9,5 +9,5 @@ import Foundation
 
 struct SearchClickCortege{
     let isCurrentLocationSelect:Bool
-    let searchDto:SearchEntityDto
+    let place:WeatherPlace
 }

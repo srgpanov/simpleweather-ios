@@ -89,33 +89,34 @@ class SettingsStorage{
         private static let  KEY_CURRENT_LOCATION = "KEY_CURRENT_LOCATION"
     
     
-    func getCurrentLocationStream()-> Observable<SearchEntityDto>{
+    func getCurrentLocationStream()-> Observable<WeatherPlace>{
         return UserDefaults.standard.observable(objectType: SearchEntityDto.self, key: SettingsStorage.KEY_CURRENT_LOCATION,defaultValue: {self.getDefaultLocation()})
+            .map({ dto in
+                dto.toWeatherPlace()
+            })
             .do { dto in
             print("dto=\(dto)")
             }
     }
-    func getCurrentLocation()-> SearchEntityDto{
+    func getCurrentLocation()-> WeatherPlace{
         let fromStorage = UserDefaults.standard.get(objectType: SearchEntityDto.self, forKey:  SettingsStorage.KEY_CURRENT_LOCATION)
-        print("getCurrentLocation = \(fromStorage)")
-        return fromStorage ?? getCurrentLocation()
+        return (fromStorage ?? getDefaultLocation()).toWeatherPlace()
     }
     
     private func getDefaultLocation()->SearchEntityDto {
-        print("getDefaultLocation")
+        
        return SearchEntityDto(
             id:1,
                 name:"Краснодар",
                 region:"",
                 country:"",
                 lat:45.035469,
-                lon:38.975309,
-                url:""
+                lon:38.975309
         )
     }
     
-    func setCurrentLocation (dto:SearchEntityDto)  {
-        UserDefaults.standard.set(object: dto ,forKey: SettingsStorage.KEY_CURRENT_LOCATION)
+    func setCurrentLocation (place:WeatherPlace)  {
+        UserDefaults.standard.set(object: SearchEntityDto(place: place) ,forKey: SettingsStorage.KEY_CURRENT_LOCATION)
     }
 }
 

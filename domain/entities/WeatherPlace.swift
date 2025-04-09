@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct WeatherPlace:Codable{
+struct WeatherPlace:Equatable{
     let id:Int
     let geoLocation:GeoLocation
     let name:String

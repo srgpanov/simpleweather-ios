@@ -16,9 +16,9 @@ class FavouritesViewController: UIViewController ,UISearchResultsUpdating, UISea
     private let viewModel = FavouritesViewModel()
     private let adapter = FavouriteAdapter()
     private let bag = DisposeBag()
-    private let onLocationSelected: (SearchEntityDto) ->Void
+    private let onLocationSelected: (WeatherPlace) ->Void
     
-    init (onLocationSelected:@escaping (SearchEntityDto)->Void) {
+    init (onLocationSelected:@escaping (WeatherPlace)->Void) {
         self.onLocationSelected = onLocationSelected
         super.init(nibName: nil, bundle: nil)
     }
@@ -81,7 +81,7 @@ class FavouritesViewController: UIViewController ,UISearchResultsUpdating, UISea
                 if cortege.isCurrentLocationSelect {
                     self.searchController.isActive=false
                 } else{
-                    let viewController = WeatherDetailsViewController(geolocation: cortege.searchDto,isPreview:true)
+                    let viewController = WeatherDetailsViewController(geolocation: cortege.place,isPreview:true)
                     print("FavouritesViewController navigationController=\(self.navigationController)")
                     self.navigationController!.pushViewController(viewController, animated: true)
                 }
@@ -105,7 +105,7 @@ class FavouritesViewController: UIViewController ,UISearchResultsUpdating, UISea
         
         
         adapter.onFavouriteClick = { item in
-            self.onLocationSelected(item.sharedArgs as! SearchEntityDto)
+            self.onLocationSelected(item.sharedArgs as! WeatherPlace)
         }
         
         adapter.onTextClick = { (index, item) in

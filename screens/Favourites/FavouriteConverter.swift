@@ -11,8 +11,8 @@ import UIKit
 
 class FavouriteConverter{
     
-    func createSearchItemsList(searchResponse:[SearchEntityDto])->[RvItem]{
-        return searchResponse.map { (dto:SearchEntityDto) in
+    func createSearchItemsList(searchResponse:[WeatherPlace])->[RvItem]{
+        return searchResponse.map { (dto:WeatherPlace) in
             TextRvItem(
                 routerId: dto.id,
                 text: "\(dto.country), \(dto.region), \(dto.name)",
@@ -23,19 +23,19 @@ class FavouriteConverter{
         
     }
     
-    func createFavouriteItemsList(favourites:[SearchEntityDto]) ->[RvItem]{
-        return favourites.map { (dto:SearchEntityDto) in
+    func createFavouriteItemsList(favourites:[WeatherPlace]) ->[RvItem]{
+        return favourites.map { (place:WeatherPlace) in
             FavouriteRvItem(
-                title: dto.name ,
+                title: place.name ,
                 time: "22:59",
                 temp: "+23",
                 icon:  "ic_ovc",
-                sharedArgs: dto
+                sharedArgs: place
             )
         }
     }
     
-    func createCurrentItemsList(current:SearchEntityDto)->[RvItem]{
+    func createCurrentItemsList(current:WeatherPlace)->[RvItem]{
         return [
             FavouriteRvItem(
                 title:  current.name,

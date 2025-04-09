@@ -18,8 +18,8 @@ class FavouritesViewModel {
     private let historyStorage = SearchHistoryStorage()
     private let settingStorage = SettingsStorage()
     private let favouriteStorage = FavouriteStorage()
-    private lazy var searchSource:Observable<[SearchEntityDto]> = getSearchStream()
-    private lazy var favouriteSource:Observable<[SearchEntityDto]> = getFavouritesSource()
+    private lazy var searchSource:Observable<[WeatherPlace]> = getSearchStream()
+    private lazy var favouriteSource:Observable<[WeatherPlace]> = getFavouritesSource()
     private  lazy var s = observeSearchItemsClick()
     private var itemsClickDisposable: Disposable?
     private var isCurrentLocationSelect = false
@@ -28,19 +28,19 @@ class FavouritesViewModel {
     
     
     func observeSearchItemsClick() ->Observable<SearchClickCortege>{
-        return  elementClickSubject.withLatestFrom(searchSource){(routerId:Int,items:[SearchEntityDto]) in
-            let dto = items.first { dto in
+        return  elementClickSubject.withLatestFrom(searchSource){(routerId:Int,items:[WeatherPlace]) in
+            let place = items.first { dto in
                 dto.id==routerId
             }!
             
-            return SearchClickCortege(isCurrentLocationSelect: self.isCurrentLocationSelect, searchDto: dto)
+            return SearchClickCortege(isCurrentLocationSelect: self.isCurrentLocationSelect, place:  place)
         }
         .do(onNext: { (element: SearchClickCortege) in
-            self.historyStorage.saveSearchElement(element: element.searchDto)
+            self.historyStorage.saveSearchElement(element: element.place)
             
             print("isCurrentLocationSelect=\(self.isCurrentLocationSelect)")
             if self.isCurrentLocationSelect {
-                self.settingStorage.setCurrentLocation(dto: element.searchDto )
+                self.settingStorage.setCurrentLocation(place: element.place )
             }
         })
     }
@@ -61,12 +61,12 @@ class FavouritesViewModel {
     }
     
     
-    private func getSearchHistoryRvItems()->Observable<[SearchEntityDto]>{
+    private func getSearchHistoryRvItems()->Observable<[WeatherPlace]>{
         return historyStorage.getSearchHistory()
     }
     
     
-    private func getSearchStream() -> Observable<[SearchEntityDto]>{
+    private func getSearchStream() -> Observable<[WeatherPlace]>{
         return searchSubject.flatMapLatest { (query:String) in
             if query.isEmpty {
                 self.getSearchHistoryRvItems()
@@ -81,13 +81,13 @@ class FavouritesViewModel {
         .refCount()
     }
     
-    private func getFavouritesSource() -> Observable<[SearchEntityDto]> {
+    private func getFavouritesSource() -> Observable<[WeatherPlace]> {
         return favouriteStorage.getFavouriteElements()
             .replay(1)
             .refCount()
     }
     
-    private func getCurrentLocation()->Observable<SearchEntityDto> {
+    private func getCurrentLocation()->Observable<WeatherPlace> {
         return settingStorage.getCurrentLocationStream()
 
     }
@@ -102,7 +102,7 @@ class FavouritesViewModel {
     }
     
     
-    private func getSearchQueryItems(query:String)-> Observable<[SearchEntityDto]>{
+    private func getSearchQueryItems(query:String)-> Observable<[WeatherPlace]>{
         return   Observable<Int>.timer(RxTimeInterval.milliseconds(300), period: nil,scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
             .flatMap {_ in
                 self.repository.search(query: query)

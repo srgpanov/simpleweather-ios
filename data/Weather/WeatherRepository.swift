@@ -13,13 +13,10 @@ class WeatherRepository {
     
     
     func getWeatherFull(latitude:Double = 45.035469,lonitude:Double = 38.975309,locale:String = "ru") -> Single<WeatherResponse> {
-        let key = "183efae9ce2049719f6123655241011"
-        let apiUrl = "https://api.weatherapi.com/v1/forecast.json?key=\(key)&q=\(latitude),\(lonitude)&aqi=no"
+        let apiUrl = "https://api.weatherapi.com/v1/forecast.json?key=\(API_KEY)&q=\(latitude),\(lonitude)&aqi=no&days=14"
         return RxAlamofire.requestData(
             .get,
             apiUrl
-
-
         )
         .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
         .map { (response, data:Data)->WeatherResponse in

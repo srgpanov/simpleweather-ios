@@ -12,7 +12,7 @@ import RxSwift
 class WeatherDetailsViewController: UIViewController {
     private let recycler = UITableView()
     private let adapter = WeatherAdapter()
-    public let location :SearchEntityDto
+    public let location :WeatherPlace
     private let viewModel:WeatherDetailsViewModel
     private let bag = DisposeBag()
     private let isPreview:Bool
@@ -24,10 +24,10 @@ class WeatherDetailsViewController: UIViewController {
     static let elementOffset = 16
     
     
-    init(geolocation:SearchEntityDto, isPreview:Bool){
+    init(geolocation:WeatherPlace, isPreview:Bool){
         self.location = geolocation
         self.isPreview = isPreview
-        viewModel = WeatherDetailsViewModel(location:location, isPreview: isPreview)
+        viewModel = WeatherDetailsViewModel(location:geolocation, isPreview: isPreview)
         super.init(nibName: nil, bundle: nil)
     }
     

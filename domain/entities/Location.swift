@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GeoLocation :Codable{
+struct GeoLocation :Equatable{
     let latitude:Double
     let longitude:Double
 }

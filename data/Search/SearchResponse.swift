@@ -16,7 +16,27 @@ struct SearchEntityDto: Codable,Equatable {
     let country: String
     let lat: Double
     let lon: Double
-    let url: String
+
+    
+    init(place:WeatherPlace){
+        self.id = place.id
+        self.name = place.name
+        self.region = place.region
+        self.country = place.country
+        self.lat = place.geoLocation.latitude
+        self.lon = place.geoLocation.longitude
+    }
+    
+    init(id: Int, name: String, region: String, country: String, lat: Double, lon: Double) {
+        self.id = id
+        self.name = name
+        self.region = region
+        self.country = country
+        self.lat = lat
+        self.lon = lon
+    }
+    
+    
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -25,7 +45,6 @@ struct SearchEntityDto: Codable,Equatable {
         case country = "country"
         case lat = "lat"
         case lon = "lon"
-        case url = "url"
     }
 }
 

@@ -16,12 +16,12 @@ class SearchHistoryStorage{
     private static let MAX_HISTORY_LENGTH = 20
     
     
-    func saveSearchElement(element:SearchEntityDto){
+    func saveSearchElement(element:WeatherPlace){
         var currentSearchList:[SearchEntityDto] =  storage.readArray(forKey:  SearchHistoryStorage.KEY_SEARCH_HISTORY)
         currentSearchList = currentSearchList.filter { (item:SearchEntityDto) in
             element.id != item.id
         }
-        currentSearchList.insert(element, at: 0)
+        currentSearchList.insert(SearchEntityDto(place: element), at: 0)
         currentSearchList=currentSearchList.take(count: SearchHistoryStorage.MAX_HISTORY_LENGTH )
         
         let currentList = currentSearchList.map { item in
@@ -31,8 +31,13 @@ class SearchHistoryStorage{
         storage.saveArray(array: currentSearchList, forKey: SearchHistoryStorage.KEY_SEARCH_HISTORY)
     }
     
-    func getSearchHistory() -> Observable<[SearchEntityDto]>{
+    func getSearchHistory() -> Observable<[WeatherPlace]>{
         return storage.observableArray(key:SearchHistoryStorage.KEY_SEARCH_HISTORY)
+            .map { (dtos:[SearchEntityDto]) in
+                dtos.map { dto in
+                    dto.toWeatherPlace()
+                }
+            }
     }
     
     

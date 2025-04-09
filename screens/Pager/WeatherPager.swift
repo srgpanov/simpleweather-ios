@@ -9,12 +9,12 @@ import Foundation
 import UIKit
 
 class WeatherPager : UIPageViewController{
-    private var weatherItems: [SearchEntityDto]
+    private var weatherItems: [WeatherPlace]
     private var currentIndex: Int
     
     
     init(){
-        let current:SearchEntityDto = SettingsStorage().getCurrentLocation()
+        let current:WeatherPlace = SettingsStorage().getCurrentLocation()
         print ("current=\(current)")
         weatherItems=[current] + FavouriteStorage().getFavouriteElements()
         currentIndex=0
@@ -71,10 +71,10 @@ class WeatherPager : UIPageViewController{
         
         
         leftImageBtn.setOnClickListener{
-            let viewController = FavouritesViewController { (dto:SearchEntityDto) in
+            let viewController = FavouritesViewController { (place:WeatherPlace) in
                 self.navigationController!.popViewController(animated: true)
                 
-                self.jump(to:self.weatherItems.firstIndex(of: dto)!, completion: nil)
+                self.jump(to:self.weatherItems.firstIndex(of: place)!, completion: nil)
             }
                 self.navigationController!.pushViewController(viewController, animated: true)
         }
@@ -84,7 +84,7 @@ class WeatherPager : UIPageViewController{
         navigationItem.titleView?.backgroundColor = .blue
     }
     
-    private func setupToolbar(dto:SearchEntityDto){
+    private func setupToolbar(dto:WeatherPlace){
         navigationItem.title = dto.name
     }
     private func jump(to: Int, completion: ((_ vc: WeatherDetailsViewController) -> Void)?){
