@@ -13,9 +13,11 @@ extension String{
         let localizedStr = NSLocalizedString(self, comment: "")
         return localizedStr
     }
-  
     
-
+    func asStringRes(arguments: CVarArg...) -> String {
+        let localizedStr = NSLocalizedString(self, comment: "")
+        return String(format: localizedStr, arguments: arguments)
+    }
 }
 
 extension Optional where Wrapped == String {

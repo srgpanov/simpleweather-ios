@@ -122,6 +122,39 @@
         }
       }
     },
+    "forecast_feels_like" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ощущается как"
+          }
+        }
+      }
+    },
+    "forecast_wind_gust" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Порывы"
+          }
+        }
+      }
+    },
+    "forecast_wind_speed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ветер, %@"
+          }
+        }
+      }
+    },
     "geo_location" : {
       "extractionState" : "manual",
       "localizations" : {

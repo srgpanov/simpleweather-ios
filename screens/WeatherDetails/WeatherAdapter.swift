@@ -10,6 +10,7 @@ import UIKit
 
 class WeatherAdapter : NSObject, UITableViewDataSource,UITableViewDelegate {
     private var items:[RvItem] = []
+    var forecastClickListener : ()->Void = {}
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -29,6 +30,7 @@ class WeatherAdapter : NSObject, UITableViewDataSource,UITableViewDelegate {
         case let item as WeatherDayRvItem :
             let cell = tableView.dequeueReusableCell(withIdentifier: WeatherDayRvItem.identifier) as! WeatherDayCell
             cell.bind(item:item )
+            cell.contentView.setOnClickListener(action: forecastClickListener)
             viewHolder = cell
         default:
             fatalError()

@@ -42,8 +42,6 @@ class WeatherDetailsViewController: UIViewController {
         setupViews()
         print("WeatherDetailsViewController viewDidLoad")
         bindViewModel()
-        
-        
     }
     
     func bindViewModel(){
@@ -79,6 +77,11 @@ class WeatherDetailsViewController: UIViewController {
         
         let safeAreaBottom: CGFloat = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.bottom ?? 0.0
         recycler.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: safeAreaBottom, right: 0.0);
+        
+        adapter.forecastClickListener = {
+            let viewController = ForecastViewController()
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
     }
     
     private func setupViews(){

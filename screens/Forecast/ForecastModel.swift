@@ -7,4 +7,6 @@
 
 import UIKit
 
-struct ForecastModel  
+struct ForecastModel{
+    
+}
