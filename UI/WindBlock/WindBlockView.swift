@@ -43,6 +43,7 @@ class WindBlockView: UIView {
         nightWindColumn.backgroundColor = .yellow
         backgroundColor = .cyan
         tvGust.backgroundColor = .brown
+        tvWind.backgroundColor = .brown
         
         
         tvGust.textSize = 12
@@ -52,7 +53,7 @@ class WindBlockView: UIView {
     
     private  func setupConstraints() {
         tvWind.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(12)
             make.leading.equalToSuperview().inset(16)
             make.trailing.lessThanOrEqualToSuperview()
         }
