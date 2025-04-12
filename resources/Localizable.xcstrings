@@ -133,6 +133,50 @@
         }
       }
     },
+    "forecast_humidity_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Влажность"
+          }
+        }
+      }
+    },
+    "forecast_moon_phase" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фаза луны"
+          }
+        }
+      }
+    },
+    "forecast_pressure_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Давление,%@"
+          }
+        }
+      }
+    },
+    "forecast_temp_water" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Температура воды"
+          }
+        }
+      }
+    },
     "forecast_wind_gust" : {
       "extractionState" : "manual",
       "localizations" : {

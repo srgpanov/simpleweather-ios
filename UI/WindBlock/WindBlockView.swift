@@ -79,11 +79,9 @@ class WindBlockView: UIView {
         dayWindColumn.snp.makeConstraints { make in
             make.leading.equalTo(morningWindColumn.snp.trailing).priority(.high)
         }
-//        
         eveningWindColumn.snp.makeConstraints { make in
             make.leading.equalTo(dayWindColumn.snp.trailing).priority(.high)
         }
-//        
         nightWindColumn.snp.makeConstraints { make in
             make.leading.equalTo(eveningWindColumn.snp.trailing).priority(.high)
             make.trailing.equalToSuperview()

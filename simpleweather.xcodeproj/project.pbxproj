@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		9E0637732B53F26A00AFC490 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E0637722B53F26A00AFC490 /* Icons.xcassets */; };
 		9E06A0122AD308AF00CB46A5 /* WeatherDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E06A0112AD308AF00CB46A5 /* WeatherDayCell.swift */; };
+		9E1831082DAB198D00B97536 /* DayIndicatorBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1831072DAB198D00B97536 /* DayIndicatorBlockView.swift */; };
+		9E18310A2DAB199D00B97536 /* DayIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1831092DAB199D00B97536 /* DayIndicatorView.swift */; };
+		9E18310C2DAB1D5300B97536 /* DayIndicatorLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18310B2DAB1D5300B97536 /* DayIndicatorLineView.swift */; };
 		9E18FBD42AC8DE51009CFD71 /* WeatherDayRvItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18FBD32AC8DE51009CFD71 /* WeatherDayRvItem.swift */; };
 		9E18FBD72AC8DF0F009CFD71 /* WeatherHourlyRvItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18FBD62AC8DF0F009CFD71 /* WeatherHourlyRvItem.swift */; };
 		9E18FBD92AC8E203009CFD71 /* WeatherHourlyAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18FBD82AC8E203009CFD71 /* WeatherHourlyAdapter.swift */; };
@@ -19,7 +22,6 @@
 		9E2161FF2DA7FC290006F316 /* TempBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2161FE2DA7FC290006F316 /* TempBlockView.swift */; };
 		9E2162022DA7FC3E0006F316 /* WindBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2162012DA7FC3E0006F316 /* WindBlockView.swift */; };
 		9E2162052DA7FC690006F316 /* HumidityBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2162042DA7FC690006F316 /* HumidityBlockView.swift */; };
-		9E2162082DA7FC850006F316 /* PressureBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2162072DA7FC850006F316 /* PressureBlockView.swift */; };
 		9E21620A2DA7FD3A0006F316 /* TempColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2162092DA7FD3A0006F316 /* TempColumnView.swift */; };
 		9E21620C2DA800770006F316 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E21620B2DA800770006F316 /* ViewExtensions.swift */; };
 		9E2162102DA849DA0006F316 /* WindColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E21620F2DA849DA0006F316 /* WindColumnView.swift */; };
@@ -78,6 +80,9 @@
 /* Begin PBXFileReference section */
 		9E0637722B53F26A00AFC490 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		9E06A0112AD308AF00CB46A5 /* WeatherDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDayCell.swift; sourceTree = "<group>"; };
+		9E1831072DAB198D00B97536 /* DayIndicatorBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayIndicatorBlockView.swift; sourceTree = "<group>"; };
+		9E1831092DAB199D00B97536 /* DayIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayIndicatorView.swift; sourceTree = "<group>"; };
+		9E18310B2DAB1D5300B97536 /* DayIndicatorLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayIndicatorLineView.swift; sourceTree = "<group>"; };
 		9E18FBD32AC8DE51009CFD71 /* WeatherDayRvItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDayRvItem.swift; sourceTree = "<group>"; };
 		9E18FBD62AC8DF0F009CFD71 /* WeatherHourlyRvItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherHourlyRvItem.swift; sourceTree = "<group>"; };
 		9E18FBD82AC8E203009CFD71 /* WeatherHourlyAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherHourlyAdapter.swift; sourceTree = "<group>"; };
@@ -88,7 +93,6 @@
 		9E2161FE2DA7FC290006F316 /* TempBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempBlockView.swift; sourceTree = "<group>"; };
 		9E2162012DA7FC3E0006F316 /* WindBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindBlockView.swift; sourceTree = "<group>"; };
 		9E2162042DA7FC690006F316 /* HumidityBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumidityBlockView.swift; sourceTree = "<group>"; };
-		9E2162072DA7FC850006F316 /* PressureBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressureBlockView.swift; sourceTree = "<group>"; };
 		9E2162092DA7FD3A0006F316 /* TempColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempColumnView.swift; sourceTree = "<group>"; };
 		9E21620B2DA800770006F316 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		9E21620F2DA849DA0006F316 /* WindColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindColumnView.swift; sourceTree = "<group>"; };
@@ -157,6 +161,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9E1831062DAB196C00B97536 /* DayIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				9E1831072DAB198D00B97536 /* DayIndicatorBlockView.swift */,
+				9E1831092DAB199D00B97536 /* DayIndicatorView.swift */,
+				9E18310B2DAB1D5300B97536 /* DayIndicatorLineView.swift */,
+			);
+			path = DayIndicator;
+			sourceTree = "<group>";
+		};
 		9E18FBCF2AC84EF2009CFD71 /* CoreUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,14 +231,6 @@
 				9E2162042DA7FC690006F316 /* HumidityBlockView.swift */,
 			);
 			path = HumidityBlock;
-			sourceTree = "<group>";
-		};
-		9E2162062DA7FC6F0006F316 /* PressureBlock */ = {
-			isa = PBXGroup;
-			children = (
-				9E2162072DA7FC850006F316 /* PressureBlockView.swift */,
-			);
-			path = PressureBlock;
 			sourceTree = "<group>";
 		};
 		9E22D8112CB2B9D800ECDA27 /* Favourites */ = {
@@ -422,7 +428,7 @@
 		9EC718A82AC71E3100D55C76 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				9E2162062DA7FC6F0006F316 /* PressureBlock */,
+				9E1831062DAB196C00B97536 /* DayIndicator */,
 				9E2162032DA7FC520006F316 /* HumidityBlock */,
 				9E2162002DA7FC2D0006F316 /* WindBlock */,
 				9E2161FD2DA7FA890006F316 /* TempBlock */,
@@ -561,9 +567,10 @@
 				9EC718B22AC728BA00D55C76 /* WeatherAdapter.swift in Sources */,
 				9EC7188E2AC6D53A00D55C76 /* WeatherDetailsViewController.swift in Sources */,
 				9EC718AF2AC71F4500D55C76 /* RvItem.swift in Sources */,
+				9E18310A2DAB199D00B97536 /* DayIndicatorView.swift in Sources */,
 				9E2162052DA7FC690006F316 /* HumidityBlockView.swift in Sources */,
+				9E1831082DAB198D00B97536 /* DayIndicatorBlockView.swift in Sources */,
 				9EAD98862DA5191000846D95 /* UserLocationItem.swift in Sources */,
-				9E2162082DA7FC850006F316 /* PressureBlockView.swift in Sources */,
 				9EE3448A2CCECE3C00C427FF /* FavouriteAdapter.swift in Sources */,
 				9EFFF5B02B45795400B40609 /* WeatherDetailsViewModel.swift in Sources */,
 				9E52C2CC2D29D80F00E4FC5B /* FavouriteCell.swift in Sources */,
@@ -603,6 +610,7 @@
 				9E2161F82DA7EA1B0006F316 /* ForecastViewController.swift in Sources */,
 				9EC718AB2AC71E6400D55C76 /* WeatherHeaderCell.swift in Sources */,
 				9E52C2CA2D29D73700E4FC5B /* FavouriteRvItem.swift in Sources */,
+				9E18310C2DAB1D5300B97536 /* DayIndicatorLineView.swift in Sources */,
 				9EE344912CCECFBE00C427FF /* TextRvItem.swift in Sources */,
 				9EAF45662ADB3A95004FA9A5 /* WeatherDetailCell.swift in Sources */,
 				9E18FBD72AC8DF0F009CFD71 /* WeatherHourlyRvItem.swift in Sources */,

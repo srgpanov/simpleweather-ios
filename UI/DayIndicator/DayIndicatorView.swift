@@ -1,13 +1,13 @@
 //
-//  PressureBlockView.swift
+//  DayIndicatorView.swift
 //  simpleweather
 //
-//  Created by Панов Сергей on 10.04.2025.
+//  Created by Панов Сергей on 13.04.2025.
 //
 
 import UIKit
 
-class PressureBlockView: UIView {
+class DayIndicatorView: UIView {
 
     /*
     // Only override draw() if you perform custom drawing.
