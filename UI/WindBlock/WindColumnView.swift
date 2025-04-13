@@ -43,10 +43,6 @@ class WindColumnView: UIView {
         tvWindSpeed.text = "В"
         tvWindGust.text = "до 8"
         
-        tvDirection.backgroundColor = .red
-        containerWindDirection.backgroundColor = .brown
-        tvWindSpeed.backgroundColor = .cyan
-        tvWindGust.backgroundColor = .green
     }
     
     private  func setupConstraints() {

@@ -6,61 +6,90 @@
 //
 
 import UIKit
+import RxSwift
 
 class ForecastViewController: UIViewController {
 
     private let viewModel = ForecastViewModel()
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
     private let tempBlock =     TempBlockView()
     private let  windBlock =     WindBlockView()
     private let  humidityBlock =     HumidityBlockView()
     private let  pressureBlock =     HumidityBlockView()
     private let  dayIndicatorBlock =     DayIndicatorBlockView()
+    private let bag = DisposeBag()
     
     
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupConstraints()
         
-        setupViews()
+
+        bindViewModel()
     }
     
     override func loadView() {
         let rootView = UIView()
-        rootView.backgroundColor = UIColor.systemBackground
-        rootView.addSubview(tempBlock)
-        rootView.addSubview(windBlock)
-        rootView.addSubview(humidityBlock)
-        rootView.addSubview(pressureBlock)
-        rootView.addSubview(dayIndicatorBlock)
+        rootView.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        scrollView.backgroundColor = UIColor.systemBackground
+        contentView.addSubview(tempBlock)
+        contentView.addSubview(windBlock)
+        contentView.addSubview(humidityBlock)
+        contentView.addSubview(pressureBlock)
+        contentView.addSubview(dayIndicatorBlock)
+        
+        
+        tempBlock.asCardView()
+        windBlock.asCardView()
+        humidityBlock.asCardView()
+        pressureBlock.asCardView()
+        dayIndicatorBlock.asCardView()
+
         
         self.view=rootView
     }
     
+    func bindViewModel(){
+        viewModel.dayForecastUi
+            .subscribe { (model:ForecastUi) in
+                self.setupHumidityBlock(humidity: model.humidity)
+                self.setupPressureBlock(pressure: model.pressure)
+                self.setupTempBlock(temp:model.temp)
+            }
+            .disposed(by: bag)
+
+    }
+    
     private func setupViews(){
-        tempBlock.backgroundColor = .cyan
-        dayIndicatorBlock.backgroundColor = .cyan
-        
-        setupHumidityBlock()
-        setupPressureBlock()
         setupDayIndicatorBlock()
     }
     
-    fileprivate func setupHumidityBlock() {
+    
+    private func setupTempBlock (temp:ForecastUi.DayTempUi){
+        tempBlock.morningTempColumn.tvCurrentTemp.text = temp.morning
+        tempBlock.dayTempColumn.tvCurrentTemp.text = temp.day
+        tempBlock.eveningTempColumn.tvCurrentTemp.text = temp.evening
+        tempBlock.nightTempColumn.tvCurrentTemp.text = temp.night
+        
+    }
+    fileprivate func setupHumidityBlock(humidity:ForecastUi.DayHumidityUi) {
         humidityBlock.tvTitle.text = "forecast_humidity_title".asStringRes()
-        humidityBlock.tvMorning.text = "70%"
-        humidityBlock.tvDay.text = "40%"
-        humidityBlock.tvEvening.text = "47%"
-        humidityBlock.tvNight.text = "69%"
+        humidityBlock.tvMorning.text = humidity.morning
+        humidityBlock.tvDay.text = humidity.day
+        humidityBlock.tvEvening.text = humidity.evening
+        humidityBlock.tvNight.text = humidity.night
     }
 
-    fileprivate func setupPressureBlock() {
-        pressureBlock.tvTitle.text = "forecast_pressure_title".asStringRes(arguments: "мм рт. ст.")
-        pressureBlock.tvMorning.text = "758"
-        pressureBlock.tvDay.text = "758"
-        pressureBlock.tvEvening.text = "757"
-        pressureBlock.tvNight.text = "758"
+    fileprivate func setupPressureBlock(pressure:ForecastUi.DayPressureUi) {
+        pressureBlock.tvTitle.text = "forecast_pressure_title".asStringRes(arguments:pressure.measurements)
+        pressureBlock.tvMorning.text = pressure.morning
+        pressureBlock.tvDay.text = pressure.day
+        pressureBlock.tvEvening.text = pressure.evening
+        pressureBlock.tvNight.text = pressure.night
     }
     
     fileprivate func setupDayIndicatorBlock() {
@@ -72,10 +101,17 @@ class ForecastViewController: UIViewController {
     }
     
     private func setupConstraints(){
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        contentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.width.equalToSuperview()
+        }
         tempBlock.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(12)
             make.trailing.equalToSuperview().inset(12)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top )
+            make.top.equalTo(contentView.snp.top )
             make.height.equalTo(132)
         }
         windBlock.snp.makeConstraints { make in
@@ -101,6 +137,7 @@ class ForecastViewController: UIViewController {
             make.trailing.equalToSuperview().inset(12)
             make.top.equalTo(pressureBlock.snp.bottom ).offset(12)
             make.height.equalTo(216)
+            make.bottom.equalTo(contentView.snp.bottom).offset(-20)
         }
     }
 }

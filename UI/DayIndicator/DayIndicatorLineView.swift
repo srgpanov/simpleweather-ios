@@ -27,8 +27,6 @@ let tvRight = UILabel()
         addSubview(tvLeft)
         addSubview(tvRight)
         
-        tvLeft.backgroundColor = .blue
-        tvRight.backgroundColor = .green
         
     }
     

@@ -46,12 +46,6 @@ class HumidityBlockView: UIView {
         tvEvening.textAlignment = .center
         tvNight.textAlignment = .center
         
-        tvMorning.backgroundColor = .blue
-        tvDay.backgroundColor = .green
-        tvEvening.backgroundColor = .red
-        tvNight.backgroundColor = .yellow
-        backgroundColor = .cyan
-        tvTitle.backgroundColor = .brown
         
     }
     

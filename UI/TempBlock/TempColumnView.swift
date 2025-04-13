@@ -41,8 +41,6 @@ class TempColumnView: UIView {
         tvFeelsLikeTemp.text = "13°"
         tvFeelsLikeTemp.textColor = .lightGray
         
-        tvCurrentTemp.backgroundColor = .white
-        tvFeelsLikeTemp.backgroundColor = .cyan
     }
     
     private  func setupConstraints() {

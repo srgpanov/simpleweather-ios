@@ -8,13 +8,42 @@
 import UIKit
 
 class DayIndicatorView: UIView {
+    
+    private let imageLayer = CAShapeLayer()
+    private let textLayer = CATextLayer()
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setupView()
+        
+        setupLayers()
     }
-    */
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+   
+    
+    private func setupView(){
+        snp.makeConstraints { make in
+            make.height.equalTo(snp.width).dividedBy(2.2)
+        }
+        
+    }
+    
+    private func setupLayers(){
+        let path = UIBezierPath()
+        
+        path.move(to: CGPoint(x:50.0,y:50.0))
+        path.addLine(to: CGPoint(x:50.0,y:60.0))
+        path.lineWidth = 5
+        
+        imageLayer.path = path.cgPath
+        imageLayer.fillColor = UIColor.red.cgColor
+        imageLayer.strokeColor = UIColor.red.cgColor
+        layer.addSublayer(imageLayer)
+    }
+    
 }

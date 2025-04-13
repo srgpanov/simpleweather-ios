@@ -37,11 +37,6 @@ class TempBlockView: UIView {
         addSubview(nightTempColumn)
         addSubview(tvFellsLike)
         
-        morningTempColumn.backgroundColor = .blue
-        dayTempColumn.backgroundColor = .green
-        eveningTempColumn.backgroundColor = .red
-        nightTempColumn.backgroundColor = .yellow
-        tvFellsLike.backgroundColor = .brown
         
         tvFellsLike.text = "forecast_feels_like".asStringRes()
         tvFellsLike.textSize = 12

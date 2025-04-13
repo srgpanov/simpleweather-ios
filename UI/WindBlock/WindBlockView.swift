@@ -37,13 +37,6 @@ class WindBlockView: UIView {
         addSubview(tvGust)
         
         
-        morningWindColumn.backgroundColor = .blue
-        dayWindColumn.backgroundColor = .green
-        eveningWindColumn.backgroundColor = .red
-        nightWindColumn.backgroundColor = .yellow
-        backgroundColor = .cyan
-        tvGust.backgroundColor = .brown
-        tvWind.backgroundColor = .brown
         
         
         tvGust.textSize = 12

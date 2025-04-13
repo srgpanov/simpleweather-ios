@@ -16,6 +16,8 @@
 		9E18FBD72AC8DF0F009CFD71 /* WeatherHourlyRvItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18FBD62AC8DF0F009CFD71 /* WeatherHourlyRvItem.swift */; };
 		9E18FBD92AC8E203009CFD71 /* WeatherHourlyAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18FBD82AC8E203009CFD71 /* WeatherHourlyAdapter.swift */; };
 		9E18FBDB2AC8E24D009CFD71 /* WeatherHourlyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E18FBDA2AC8E24D009CFD71 /* WeatherHourlyCell.swift */; };
+		9E1B50AA2DD9E4EE0011E38A /* ForecastConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1B50A92DD9E4EE0011E38A /* ForecastConverter.swift */; };
+		9E1B50AC2DD9E7CD0011E38A /* ForecastUi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1B50AB2DD9E7CD0011E38A /* ForecastUi.swift */; };
 		9E2161F82DA7EA1B0006F316 /* ForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2161F72DA7EA1B0006F316 /* ForecastViewController.swift */; };
 		9E2161FA2DA7EA3C0006F316 /* ForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2161F92DA7EA3C0006F316 /* ForecastViewModel.swift */; };
 		9E2161FC2DA7ED420006F316 /* ForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2161FB2DA7ED420006F316 /* ForecastModel.swift */; };
@@ -87,6 +89,8 @@
 		9E18FBD62AC8DF0F009CFD71 /* WeatherHourlyRvItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherHourlyRvItem.swift; sourceTree = "<group>"; };
 		9E18FBD82AC8E203009CFD71 /* WeatherHourlyAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherHourlyAdapter.swift; sourceTree = "<group>"; };
 		9E18FBDA2AC8E24D009CFD71 /* WeatherHourlyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherHourlyCell.swift; sourceTree = "<group>"; };
+		9E1B50A92DD9E4EE0011E38A /* ForecastConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastConverter.swift; sourceTree = "<group>"; };
+		9E1B50AB2DD9E7CD0011E38A /* ForecastUi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastUi.swift; sourceTree = "<group>"; };
 		9E2161F72DA7EA1B0006F316 /* ForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewController.swift; sourceTree = "<group>"; };
 		9E2161F92DA7EA3C0006F316 /* ForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel.swift; sourceTree = "<group>"; };
 		9E2161FB2DA7ED420006F316 /* ForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastModel.swift; sourceTree = "<group>"; };
@@ -203,6 +207,8 @@
 				9E2161F72DA7EA1B0006F316 /* ForecastViewController.swift */,
 				9E2161F92DA7EA3C0006F316 /* ForecastViewModel.swift */,
 				9E2161FB2DA7ED420006F316 /* ForecastModel.swift */,
+				9E1B50A92DD9E4EE0011E38A /* ForecastConverter.swift */,
+				9E1B50AB2DD9E7CD0011E38A /* ForecastUi.swift */,
 			);
 			path = Forecast;
 			sourceTree = "<group>";
@@ -595,12 +601,14 @@
 				9E5EAAA22D0616C500A56369 /* Location.swift in Sources */,
 				9EAFF3D32B9D134000C29743 /* SettingsAdapter.swift in Sources */,
 				9E73DED42B79538C00365269 /* ClickListener.swift in Sources */,
+				9E1B50AA2DD9E4EE0011E38A /* ForecastConverter.swift in Sources */,
 				9EC7188C2AC6D53A00D55C76 /* SceneDelegate.swift in Sources */,
 				9E2162102DA849DA0006F316 /* WindColumnView.swift in Sources */,
 				9EAD98842DA5190100846D95 /* UserLocationCell.swift in Sources */,
 				9E21620A2DA7FD3A0006F316 /* TempColumnView.swift in Sources */,
 				9EC1DB832B44BB2F008C783E /* WeatherRepository.swift in Sources */,
 				9E43ECF12D22B8EB00B9EBDF /* InteractivePopRecognizer.swift in Sources */,
+				9E1B50AC2DD9E7CD0011E38A /* ForecastUi.swift in Sources */,
 				9EE344932CCED20A00C427FF /* TextCell.swift in Sources */,
 				9E18FBD42AC8DE51009CFD71 /* WeatherDayRvItem.swift in Sources */,
 				9E18FBD92AC8E203009CFD71 /* WeatherHourlyAdapter.swift in Sources */,
