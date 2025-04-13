@@ -9,6 +9,7 @@ import UIKit
 
 class DayIndicatorBlockView: UIView {
 
+    let dayIndicatorView = DayIndicatorView()
     let lineMoonPhase = DayIndicatorLineView()
     let lineWaterTemp = DayIndicatorLineView()
 
@@ -24,6 +25,7 @@ class DayIndicatorBlockView: UIView {
     }
     
     private func setupInnerViews(){
+        addSubview(dayIndicatorView)
         addSubview(lineMoonPhase)
         addSubview(lineWaterTemp)
         
@@ -32,6 +34,13 @@ class DayIndicatorBlockView: UIView {
     }
     
     private func setupConstraints(){
+        dayIndicatorView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.lessThanOrEqualTo(lineMoonPhase.snp.top)
+            make.top.equalToSuperview().offset(16)
+        }
+        
         lineMoonPhase.snp.makeConstraints { make in
             make.leading.equalToSuperview()
             make.bottom.equalTo(lineWaterTemp.snp.top)
@@ -44,5 +53,6 @@ class DayIndicatorBlockView: UIView {
             make.trailing.equalToSuperview()
             make.height.equalTo(20)
         }
+
     }
 }
