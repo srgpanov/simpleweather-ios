@@ -27,7 +27,6 @@ class SearchHistoryStorage{
         let currentList = currentSearchList.map { item in
             item.name + " \(item.id)"
         }
-        print("SearchHistoryStorage \(currentList)")
         storage.saveArray(array: currentSearchList, forKey: SearchHistoryStorage.KEY_SEARCH_HISTORY)
     }
     
@@ -163,7 +162,6 @@ extension UserDefaults {
             let data:Data = try JSONEncoder().encode(array)
             set(data, forKey: key)
         } catch {
-            print("Error encoding array: \(error)")
         }
     }
     
@@ -172,7 +170,6 @@ extension UserDefaults {
         do {
             return try JSONDecoder().decode([T].self, from: data)
         } catch {
-            print("Error decoding array: \(error)")
             return []
         }
     }

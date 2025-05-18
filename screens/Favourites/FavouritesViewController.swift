@@ -53,25 +53,21 @@ class FavouritesViewController: UIViewController ,UISearchResultsUpdating, UISea
                 return
             }
             
-            print("searchText=\(searchText)")
             viewModel.onSearchQueryChanged(query: searchText)
         }
         
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("searchBarSearchButtonClicked")
         viewModel.onSearchItemClick(searchItem: searchBar.text.orEmpty())
     }
     
     private func observeViewModel(){
         
         viewModel.getItemsStream().subscribe (onNext: { (items:[RvItem]) in
-            print("items = \(items.count)")
             self.adapter.setItems(items: items)
             self.recycler.reloadData()
         },onError: { error in
-            print(error)
             
         })
         .disposed(by: bag)
@@ -82,7 +78,6 @@ class FavouritesViewController: UIViewController ,UISearchResultsUpdating, UISea
                     self.searchController.isActive=false
                 } else{
                     let viewController = WeatherDetailsViewController(geolocation: cortege.place,isPreview:true)
-                    print("FavouritesViewController navigationController=\(self.navigationController)")
                     self.navigationController!.pushViewController(viewController, animated: true)
                 }
             })
@@ -117,7 +112,6 @@ class FavouritesViewController: UIViewController ,UISearchResultsUpdating, UISea
             self.viewModel.onCustomLocationClick()
         }
         adapter.onGeoLocationClick = {
-            print("onGeoLocationClick")
         }
         
         recycler.snp.makeConstraints { make in

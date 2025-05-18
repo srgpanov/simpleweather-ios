@@ -75,7 +75,6 @@ class MeasurementsStorage: MeasurementsStorageProtocol {
     }
     
     func save(measurements: Measurements) {
-        print("save \(measurements)")
         storage.set(measurements.temp != .CELSIUS, forKey: "temp")
         storage.set(measurements.windSpeed != .M_S, forKey: "windSpeed")
         storage.set(measurements.pressure != .MM_OF_MERCURY, forKey: "pressure")
@@ -95,7 +94,6 @@ class SettingsStorage{
                 dto.toWeatherPlace()
             })
             .do { dto in
-            print("dto=\(dto)")
             }
     }
     func getCurrentLocation()-> WeatherPlace{

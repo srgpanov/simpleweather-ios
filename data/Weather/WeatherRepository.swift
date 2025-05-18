@@ -30,10 +30,8 @@ class WeatherRepository {
         }
         .asSingle()
         .do (onSuccess: { WeatherResponse in
-            print("22")
             
         }) { Error in
-            print("Error=\(Error)")
         }
     
        

@@ -30,11 +30,8 @@ class WeatherDetailsViewModel{
             }
             .observe(on: MainScheduler.instance)
             .do (onSuccess: { (s:[RvItem]) in
-                print("s=\(s)"
-                )
                 
             }, onError: { Error in
-                print("Error=\(Error)")
             })
     }
     

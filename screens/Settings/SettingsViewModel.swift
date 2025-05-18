@@ -19,7 +19,6 @@ class SettingsViewModel {
     
     
     init(){
-        print("load = \(storage.load())")
         measurementsSource =   clickSubject.scan(storage.load(), accumulator: {(acc,event) in
             var neeAcc = acc
             switch event.name{
@@ -45,7 +44,6 @@ class SettingsViewModel {
             default:fatalError()
             }
             
-            print ("neeAcc = \(neeAcc) event=\(event)")
             return neeAcc
         }
         )
@@ -63,7 +61,6 @@ class SettingsViewModel {
             ]
         }
         measurementsSource.subscribe { Measurements in
-           print ("Measurements save =\(Measurements)")
             self.storage.save(measurements: Measurements)
        }
         .disposed(by: bag)

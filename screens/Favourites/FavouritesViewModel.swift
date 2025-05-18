@@ -38,7 +38,6 @@ class FavouritesViewModel {
         .do(onNext: { (element: SearchClickCortege) in
             self.historyStorage.saveSearchElement(element: element.place)
             
-            print("isCurrentLocationSelect=\(self.isCurrentLocationSelect)")
             if self.isCurrentLocationSelect {
                 self.settingStorage.setCurrentLocation(place: element.place )
             }
@@ -75,7 +74,6 @@ class FavouritesViewModel {
             }
         }
         .do(onSubscribe: {
-            print("getSearchStream onSubscribe")
         })
         .replay(1)
         .refCount()
@@ -127,7 +125,6 @@ class FavouritesViewModel {
     }
     
     func onFavoriteItemClick(index:Int,item:FavouriteRvItem){
-        print("onFavoriteItemClick")
         
     }
     

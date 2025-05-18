@@ -31,6 +31,7 @@ class DayIndicatorView: UIView {
             make.height.equalTo(snp.width).dividedBy(2.2)
         }
         
+        backgroundColor = .blue.withAlphaComponent(0.5)
     }
     
     private func setupLayers(){

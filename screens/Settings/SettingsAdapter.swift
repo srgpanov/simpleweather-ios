@@ -21,6 +21,18 @@ class SettingsAdapter:NSObject, UITableViewDataSource, UITableViewDelegate{
         return items.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let item = items[indexPath.item]
+        
+        switch item {
+        case _ as SettingsSwitchRvItem :
+           
+            return CGFloat(48)
+        default:
+            fatalError()
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = items[indexPath.row]
         

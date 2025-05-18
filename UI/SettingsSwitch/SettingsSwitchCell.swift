@@ -37,12 +37,12 @@ class SettingsSwitchCell :UITableViewCell {
     
     private func     setupConstraints(){
         label.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().offset(8)
+            make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(16)
         }
         switchView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().offset(8)
-            make.trailing.equalToSuperview().offset(16)
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-16)
         }
     }
 }

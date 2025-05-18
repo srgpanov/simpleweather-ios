@@ -23,7 +23,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let viewController =  WeatherPager()
         let navController = RootViewController(rootViewController:viewController)
-        print("SceneDelegate navigationController=\(navController)")
         window.rootViewController = navController
         window.safeAreaLayoutGuide.owningView?.backgroundColor = UIColor.cyan
         

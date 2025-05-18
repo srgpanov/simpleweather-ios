@@ -40,12 +40,10 @@ class WeatherDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        print("WeatherDetailsViewController viewDidLoad")
         bindViewModel()
     }
     
     func bindViewModel(){
-        print("WeatherDetailsViewController getWeather")
         viewModel.getWeather()
             .subscribe { items in
                 
@@ -72,7 +70,6 @@ class WeatherDetailsViewController: UIViewController {
         recycler.rowHeight = UITableView.automaticDimension
         recycler.contentInsetAdjustmentBehavior = .never
         recycler.delaysContentTouches = false
-        print("recycler=\(recycler.isUserInteractionEnabled) view=\(view.isUserInteractionEnabled)")
 
         
         let safeAreaBottom: CGFloat = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.safeAreaInsets.bottom ?? 0.0

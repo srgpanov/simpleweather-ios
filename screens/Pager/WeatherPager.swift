@@ -160,7 +160,6 @@ extension WeatherPager:UIPageViewControllerDelegate{
         let d = weatherItems.map { item in
             item.name
         }
-        print("previousViewControllers=\(previousViewControllers) transitionCompleted=\(completed) finished=\(finished) s=\(s) weatherItems=\(d)")
         
         guard
             let controllers:[WeatherDetailsViewController] = pageViewController.viewControllers as? [WeatherDetailsViewController],

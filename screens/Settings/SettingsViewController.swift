@@ -44,8 +44,7 @@ class SettingsViewController: UIViewController {
         recycler.register(SettingsSwitchCell.self, forCellReuseIdentifier: SettingsSwitchRvItem.identifier)
         recycler.dataSource = adapter
         recycler.delegate = adapter
-        
-        
+        recycler.separatorStyle = .none
         
         recycler.snp.makeConstraints { make in
             make.top.equalToSuperview()
