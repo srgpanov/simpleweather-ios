@@ -89,6 +89,39 @@
         }
       }
     },
+    "day_indicator_duration" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Световой день"
+          }
+        }
+      }
+    },
+    "day_indicator_sunrise" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "восход"
+          }
+        }
+      }
+    },
+    "day_indicator_sunset" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "закат"
+          }
+        }
+      }
+    },
     "details_screen_temp_feels_like_prefix" : {
       "extractionState" : "manual",
       "localizations" : {

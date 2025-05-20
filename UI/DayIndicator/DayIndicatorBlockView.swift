@@ -9,9 +9,9 @@ import UIKit
 
 class DayIndicatorBlockView: UIView {
 
-    let dayIndicatorView = DayIndicatorView()
-    let lineMoonPhase = DayIndicatorLineView()
-    let lineWaterTemp = DayIndicatorLineView()
+  private  let dayIndicatorView = DayIndicatorView()
+    private   let lineMoonPhase = DayIndicatorLineView()
+    private   let lineWaterTemp = DayIndicatorLineView()
 
     
     override init(frame: CGRect) {
@@ -31,6 +31,12 @@ class DayIndicatorBlockView: UIView {
         
     }
     
+    func configure(model:ForecastUi.DayIndicatorUi){
+        dayIndicatorView.configure(model: model.moonPhaseIndicator)
+        lineMoonPhase.configure(model: model.moonPhaseLine)
+        lineWaterTemp.configure(model: model.waterTempLine)
+    }
+    
     private func setupConstraints(){
         dayIndicatorView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
@@ -40,17 +46,20 @@ class DayIndicatorBlockView: UIView {
         }
         
         lineMoonPhase.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
+            make.leading.equalToSuperview().offset(16)
             make.bottom.equalTo(lineWaterTemp.snp.top)
-            make.trailing.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-16)
             make.height.equalTo(20)
         }
         lineWaterTemp.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
+            make.leading.equalToSuperview().offset(16)
             make.bottom.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-16)
             make.height.equalTo(20)
         }
+        
+        lineMoonPhase.backgroundColor = .brown.withAlphaComponent(0.3)
+        lineWaterTemp.backgroundColor = .brown.withAlphaComponent(0.3)
 
     }
 }

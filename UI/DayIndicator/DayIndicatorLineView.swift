@@ -9,8 +9,8 @@ import UIKit
 
 class DayIndicatorLineView: UIView {
 
-let tvLeft = UILabel()
-let tvRight = UILabel()
+private let tvLeft = UILabel()
+private let tvRight = UILabel()
 
     
     override init(frame: CGRect) {
@@ -27,6 +27,11 @@ let tvRight = UILabel()
         addSubview(tvLeft)
         addSubview(tvRight)
         
+    }
+    
+    func configure(model:ForecastUi.DayIndicatorUi.DayIndicatorLine){
+        tvLeft.text = model.left
+        tvRight.text = model.right
         
     }
     

@@ -59,14 +59,12 @@ class ForecastViewController: UIViewController {
                 self.setupHumidityBlock(humidity: model.humidity)
                 self.setupPressureBlock(pressure: model.pressure)
                 self.setupTempBlock(temp:model.temp)
+                self.setupDayIndicatorBlock(model: model.dayIndicator)
             }
             .disposed(by: bag)
 
     }
-    
-    private func setupViews(){
-        setupDayIndicatorBlock()
-    }
+
     
     
     private func setupTempBlock (temp:ForecastUi.DayTempUi){
@@ -92,12 +90,22 @@ class ForecastViewController: UIViewController {
         pressureBlock.tvNight.text = pressure.night
     }
     
-    fileprivate func setupDayIndicatorBlock() {
-        dayIndicatorBlock.lineMoonPhase.tvLeft.text = "forecast_moon_phase".asStringRes()
-        dayIndicatorBlock.lineWaterTemp.tvLeft.text = "forecast_temp_water".asStringRes()
-        
-        dayIndicatorBlock.lineMoonPhase.tvRight.text = "убывающая луна"
-        dayIndicatorBlock.lineWaterTemp.tvRight.text = "15°"
+    fileprivate func setupDayIndicatorBlock(model : ForecastUi.DayIndicatorUi) {
+
+//        var sunrise = DateComponents()
+//        sunrise.hour = 5
+//        sunrise.minute = 32
+//        
+//        var sunset = DateComponents()
+//        sunset.hour = 19
+//        sunset.minute = 13
+//        
+//        let model = DayIndicatorUi(
+//            moonPhaseIndicator: DayIndicatorUi.MoonPhaseUi(sunrise: sunrise, sunset: sunset, dayTime: "13 ч 41 мин"),
+//            moonPhaseLine: DayIndicatorUi.DayIndicatorLine(left: "forecast_moon_phase".asStringRes(), right: "убывающая луна"),
+//            waterTempLine: DayIndicatorUi.DayIndicatorLine(left: "forecast_temp_water".asStringRes(), right: "15°")
+//        )
+        dayIndicatorBlock.configure(model: model)
     }
     
     private func setupConstraints(){
