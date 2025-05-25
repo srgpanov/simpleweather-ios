@@ -20,7 +20,7 @@ class DayIndicatorView: UIView {
     
     private let imageLayer = CAShapeLayer()
     private let textLayer = CATextLayer()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -38,7 +38,7 @@ class DayIndicatorView: UIView {
         super.layoutSubviews()
         setupLayers()
     }
-   
+    
     
     private func setupView(){
         snp.makeConstraints { make in
@@ -73,11 +73,11 @@ class DayIndicatorView: UIView {
     private func setupLayers(){
         let path = UIBezierPath()
         
-       let centerX = self.bounds.width/2
-       let centerY = self.bounds.height/2
+        let centerX = self.bounds.width/2
+        let centerY = self.bounds.height/2
         let offset = 56.0
         let width = bounds.width-offset*2
-
+        
         let start = CGPoint(x:offset,y:centerY)
         let end = CGPoint(x: start.x+width, y: start.y)
         path.move(to: start)
@@ -88,13 +88,16 @@ class DayIndicatorView: UIView {
         let arcYOffset = 24.0
         let arcStart = CGPoint(x: start.x + arcXOffset, y: start.y - arcYOffset)
         let arcEnd = CGPoint(x: end.x - arcXOffset, y: start.y - arcYOffset)
-        let arcRadius = (width )/2
+        let arcRadius = (width - 16.0)/2
         let arcCenterY = 132.0
         
-//        path.move(to: arcStart)
+        //        path.move(to: arcStart)
         path.addArc(
             withCenter: CGPoint(x: centerX, y: arcCenterY) ,
             radius: arcRadius,
+            //            startAngle: .pi * 210/180,
+            //            endAngle: .pi * 330/180,
+            
             startAngle: .pi * 180/180,
             endAngle: .pi * 360/180,
             clockwise: true
@@ -149,5 +152,5 @@ class DayIndicatorView: UIView {
         
         return stack
     }
-
+    
 }
